@@ -1,5 +1,7 @@
 package main
 
+import "testing"
+
 // 20. Valid Parentheses
 // https://leetcode.com/problems/valid-parentheses/
 func isValid(s string) bool {
@@ -33,4 +35,28 @@ func isValid(s string) bool {
 		return false
 	}
 	return true
+}
+
+func TestIsValid(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{"example1", args{s: "()"}, true},
+		{"example2", args{s: "()[]{}"}, true},
+		{"example3", args{s: "(]"}, false},
+		{"example4", args{s: "([)]"}, false},
+		{"example5", args{s: "{[]}"}, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isValid(tt.args.s); got != tt.want {
+				t.Errorf("want %t, but %t", tt.want, got)
+			}
+		})
+	}
 }

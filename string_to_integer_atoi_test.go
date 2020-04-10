@@ -2,6 +2,7 @@ package main
 
 import (
 	"math"
+	"testing"
 )
 
 // 8. String to Integer (atoi)
@@ -41,4 +42,28 @@ LOOP:
 		ans = math.MinInt32
 	}
 	return int(ans)
+}
+
+func TestMyAtoi(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{"example1", args{str: "42"}, 42},
+		{"example2", args{str: "   -42"}, -42},
+		{"example3", args{str: "4193 with words"}, 4193},
+		{"example4", args{str: "words and 987"}, 0},
+		{"example5", args{str: "-91283472332"}, -2147483648},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := myAtoi(tt.args.str); got != tt.want {
+				t.Errorf("want %d, but %d", tt.want, got)
+			}
+		})
+	}
 }

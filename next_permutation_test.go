@@ -43,7 +43,7 @@ func TestNextPermutation(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if nextPermutation(tt.args.nums); !reflect.DeepEqual(tt.args.nums, tt.want) {
-				t.Errorf("want %d, but %d", tt.want, tt.args.nums)
+				t.Errorf("want %v, but %v", tt.want, tt.args.nums)
 			}
 		})
 	}

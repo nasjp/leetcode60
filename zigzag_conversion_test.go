@@ -1,5 +1,7 @@
 package main
 
+import "testing"
+
 // 6. ZigZag Conversion
 // https://leetcode.com/problems/zigzag-conversion/
 func convert(s string, numRows int) string {
@@ -25,4 +27,26 @@ func convert(s string, numRows int) string {
 		ret += string(arr)
 	}
 	return ret
+}
+
+func TestConvert(t *testing.T) {
+	type args struct {
+		s       string
+		numRows int
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{"example1", args{s: "PAYPALISHIRING", numRows: 3}, "PAHNAPLSIIGYIR"},
+		{"example2", args{s: "PAYPALISHIRING", numRows: 4}, "PINALSIGYAHRPI"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := convert(tt.args.s, tt.args.numRows); got != tt.want {
+				t.Errorf("want %s, but %s", tt.want, got)
+			}
+		})
+	}
 }
